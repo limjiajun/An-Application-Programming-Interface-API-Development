@@ -1,0 +1,100 @@
+@baseUrl = http://localhost/sbe3603-assignment1/public/index.php
+
+### Health check
+GET {{baseUrl}}/health
+
+### Read localities
+GET {{baseUrl}}/localities?limit=10&include_geometry=false
+
+### Filter localities by zone
+GET {{baseUrl}}/localities?zone_code=MK7&limit=10
+
+### Read one locality with GeoJSON geometry
+GET {{baseUrl}}/localities/A01
+
+### Create locality
+POST {{baseUrl}}/localities
+Content-Type: application/json
+
+{
+  "locality_code": "TEST01",
+  "locality_name": "Test Locality",
+  "road_name": "Jalan Test"
+}
+
+### Update locality
+PATCH {{baseUrl}}/localities/TEST01
+Content-Type: application/json
+
+{
+  "road_name": "Jalan Test Updated"
+}
+
+### Delete locality
+DELETE {{baseUrl}}/localities/TEST01
+
+### Read parcels with filters
+GET {{baseUrl}}/parcels?division=01&land_district=012&block_section=003&limit=5
+
+### Read parcel by object id
+GET {{baseUrl}}/parcels/183407498
+
+### Create parcel
+POST {{baseUrl}}/parcels
+Content-Type: application/json
+
+{
+  "object_id": 999000001,
+  "genamap_tag": "0101200300999",
+  "last_update": "2026-05-15",
+  "division": "01",
+  "land_district": "012",
+  "block_section": "003",
+  "lot_no_label": "999",
+  "shape_area": "1000.50",
+  "shape_length": "130.25"
+}
+
+### Update parcel
+PATCH {{baseUrl}}/parcels/999000001
+Content-Type: application/json
+
+{
+  "remarks": "Test update from API"
+}
+
+### Delete parcel
+DELETE {{baseUrl}}/parcels/999000001
+
+### Read city records
+GET {{baseUrl}}/city-records?zone_code=MK7&limit=10&include_geometry=true
+
+### Create city record
+POST {{baseUrl}}/city-records
+Content-Type: application/json
+
+{
+  "locality_code": "A01",
+  "residential_count": 51,
+  "commercial_count": 0,
+  "vacant_land_count": 11,
+  "arv_total": "RM80,650.00",
+  "annual_rates": "RM20,788.90",
+  "outstanding": "RM23,479.70",
+  "ratepayer_count": 27,
+  "last_update": "31/12/2025",
+  "zone_code": "TEST"
+}
+
+### Update city record
+PATCH {{baseUrl}}/city-records/1
+Content-Type: application/json
+
+{
+  "outstanding": "RM20,000.00",
+  "remark": "Updated during API test"
+}
+
+### Delete city record
+DELETE {{baseUrl}}/city-records/1
+
